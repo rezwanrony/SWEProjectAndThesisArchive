@@ -1,0 +1,74 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:background="@color/white"
+    android:layout_height="50dp">
+
+    <LinearLayout
+        android:layout_gravity="center"
+        android:layout_marginLeft="5dp"
+        android:layout_marginRight="5dp"
+        android:orientation="horizontal"
+        android:background="@color/white"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <TextView
+            android:layout_gravity="center"
+            android:textSize="10sp"
+            android:layout_weight="3"
+            android:textColor="@color/textcolorblue"
+            android:id="@+id/tv_projectnameallproject"
+            android:text="SWE ProjectoThesis"
+            android:layout_width="70dp"
+            android:layout_height="wrap_content" />
+
+        <TextView
+            android:layout_marginLeft="2dp"
+            android:textSize="10sp"
+            android:layout_weight="3"
+            android:layout_gravity="center"
+            android:textColor="@color/textcolorblue"
+            android:id="@+id/tv_projectownernameallproject"
+            android:text="Rezwan Ibnee Mohsin"
+            android:layout_width="70dp"
+            android:layout_height="wrap_content" />
+
+        <TextView
+            android:layout_marginLeft="2dp"
+            android:textSize="10sp"
+            android:layout_weight="3"
+            android:layout_gravity="center"
+            android:textColor="@color/textcolorblue"
+            android:id="@+id/tv_languageallproject"
+            android:text="Java(Android)"
+            android:layout_width="70dp"
+            android:layout_height="wrap_content" />
+
+
+        <TextView
+            android:layout_marginLeft="2dp"
+            android:textSize="10sp"
+            android:layout_weight="3"
+            android:layout_gravity="center"
+            android:textColor="@color/textcolorblue"
+            android:id="@+id/tv_courseallproject"
+            android:text="SWE 331"
+            android:layout_width="70dp"
+            android:layout_height="wrap_content" />
+
+        <TextView
+            android:textSize="10sp"
+            android:layout_weight="3"
+            android:layout_gravity="center"
+            android:textColor="@color/textcolorblue"
+            android:id="@+id/tv_semesterallproject"
+            android:text="Spring 2019"
+            android:layout_width="70dp"
+            android:layout_height="wrap_content" />
+
+
+
+
+    </LinearLayout>
+</LinearLayout>

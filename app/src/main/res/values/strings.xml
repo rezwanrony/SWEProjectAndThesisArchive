@@ -1,0 +1,16 @@
+<resources>
+    <string name="app_name">SWE Projectothesis</string>
+    <string name="hi">
+        <font fgcolor="#444444">Haven’t registered yet?  </font><font fgcolor="#000000">Join now</font>
+    </string>
+    <string-array name="semester_array">
+        <item>Spring</item>
+        <item>Summer</item>
+        <item>Fall</item>
+    </string-array>
+    <string-array name="course_array">
+        <item>SWE231</item>
+        <item>SWE332</item>
+        <item>SWE439</item>
+    </string-array>
+</resources>
