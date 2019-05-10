@@ -198,6 +198,7 @@ public class AllStudentProjectActivity extends AppCompatActivity {
                                         intent.putExtra("report",studentProjects.get(i).getProject_report());
                                         intent.putExtra("github",studentProjects.get(i).getGithublink());
                                         intent.putExtra("desc",studentProjects.get(i).getProject_details());
+                                        startActivity(intent);
                                     }
                                 });
                                 }
@@ -289,6 +290,7 @@ public class AllStudentProjectActivity extends AppCompatActivity {
                                             intent.putExtra("report",studentProjects.get(i).getProject_report());
                                             intent.putExtra("github",studentProjects.get(i).getGithublink());
                                             intent.putExtra("desc",studentProjects.get(i).getProject_details());
+                                            startActivity(intent);
                                         }
                                     });
 
