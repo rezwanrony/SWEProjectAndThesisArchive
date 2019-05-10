@@ -19,8 +19,7 @@ public class VirtualclassroomStudentActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_virtualclassroom_student);
-        TextView tv_title=findViewById(R.id.toolbartitle);
-        tv_title.setText("Virtual classroom");
+        CoursesActivity.getToolbar(VirtualclassroomStudentActivity.this,"Virtual classroom");
         initialize();
         List<Student> studentList=new ArrayList<Student>();
         studentList=db.getStudentDetails();

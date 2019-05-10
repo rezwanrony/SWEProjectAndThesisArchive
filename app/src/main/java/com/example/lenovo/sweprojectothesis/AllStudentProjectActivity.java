@@ -25,6 +25,7 @@ import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -85,13 +86,30 @@ public class AllStudentProjectActivity extends AppCompatActivity {
                                     String semester=jsonObject.getString("semester");
                                     String year=jsonObject.getString("year");
                                     String project_owner=jsonObject.getString("project_owner");
-                                    studentProjects.add(new AllStudentProject(name,project_owner,programming_language,semester,year));
+                                    String project_report = jsonObject.getString("project_report");
+                                    String githublink = jsonObject.getString("githublink");
+                                    String description = jsonObject.getString("description");
+                                    studentProjects.add(new AllStudentProject(name, project_owner, programming_language, semester, year,description,project_report,githublink));
                                 }
 
-                                CustomAllStudentsProjectListAdapter customAllStudentsProjectListAdapter=new CustomAllStudentsProjectListAdapter(AllStudentProjectActivity.this,studentProjects);
-
+                                CustomAllStudentsProjectListAdapter customAllStudentsProjectListAdapter = new CustomAllStudentsProjectListAdapter(AllStudentProjectActivity.this, studentProjects);
                                 lv_students.setAdapter(customAllStudentsProjectListAdapter);
 
+                                lv_students.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+                                    @Override
+                                    public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
+                                        Intent intent = new Intent(AllStudentProjectActivity.this, ProjectdetailsActivity.class);
+                                        intent.putExtra("title",studentProjects.get(i).getProjectname());
+                                        intent.putExtra("language",studentProjects.get(i).getLanguage());
+                                        intent.putExtra("semester",studentProjects.get(i).getSemester());
+                                        intent.putExtra("year",studentProjects.get(i).getYear());
+                                        intent.putExtra("owner",studentProjects.get(i).getProjectowner());
+                                        intent.putExtra("report",studentProjects.get(i).getProject_report());
+                                        intent.putExtra("github",studentProjects.get(i).getGithublink());
+                                        intent.putExtra("desc",studentProjects.get(i).getProject_details());
+                                        startActivity(intent);
+                                    }
+                                });
                             }
                             else {
                                 Toast.makeText(AllStudentProjectActivity.this, response.getString("desc"), Toast.LENGTH_SHORT).show();
@@ -159,12 +177,29 @@ public class AllStudentProjectActivity extends AppCompatActivity {
                                         String semester = jsonObject.getString("semester");
                                         String year = jsonObject.getString("year");
                                         String project_owner = jsonObject.getString("project_owner");
-                                        studentProjects.add(new AllStudentProject(name, project_owner, programming_language, semester, year));
+                                        String project_report = jsonObject.getString("project_report");
+                                        String githublink = jsonObject.getString("githublink");
+                                        String description = jsonObject.getString("description");
+                                        studentProjects.add(new AllStudentProject(name, project_owner, programming_language, semester, year,description,project_report,githublink));
                                     }
 
-                                    CustomAllStudentsProjectListAdapter customAllStudentsProjectListAdapter = new CustomAllStudentsProjectListAdapter(AllStudentProjectActivity.this, studentProjects);
+                                CustomAllStudentsProjectListAdapter customAllStudentsProjectListAdapter = new CustomAllStudentsProjectListAdapter(AllStudentProjectActivity.this, studentProjects);
+                                lv_students.setAdapter(customAllStudentsProjectListAdapter);
 
-                                    lv_students.setAdapter(customAllStudentsProjectListAdapter);
+                                lv_students.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+                                    @Override
+                                    public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
+                                        Intent intent = new Intent(AllStudentProjectActivity.this, ProjectdetailsActivity.class);
+                                        intent.putExtra("title",studentProjects.get(i).getProjectname());
+                                        intent.putExtra("language",studentProjects.get(i).getLanguage());
+                                        intent.putExtra("semester",studentProjects.get(i).getSemester());
+                                        intent.putExtra("year",studentProjects.get(i).getYear());
+                                        intent.putExtra("owner",studentProjects.get(i).getProjectowner());
+                                        intent.putExtra("report",studentProjects.get(i).getProject_report());
+                                        intent.putExtra("github",studentProjects.get(i).getGithublink());
+                                        intent.putExtra("desc",studentProjects.get(i).getProject_details());
+                                    }
+                                });
                                 }
 
                             else {
@@ -233,11 +268,30 @@ public class AllStudentProjectActivity extends AppCompatActivity {
                                         String semester = jsonObject.getString("semester");
                                         String year = jsonObject.getString("year");
                                         String project_owner = jsonObject.getString("project_owner");
-                                        studentProjects.add(new AllStudentProject(name, project_owner, programming_language, semester, year));
+                                        String project_report = jsonObject.getString("project_report");
+                                        String githublink = jsonObject.getString("githublink");
+                                        String description = jsonObject.getString("description");
+                                        studentProjects.add(new AllStudentProject(name, project_owner, programming_language, semester, year,description,project_report,githublink));
                                     }
 
                                     CustomAllStudentsProjectListAdapter customAllStudentsProjectListAdapter = new CustomAllStudentsProjectListAdapter(AllStudentProjectActivity.this, studentProjects);
                                     lv_students.setAdapter(customAllStudentsProjectListAdapter);
+
+                                    lv_students.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+                                        @Override
+                                        public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
+                                            Intent intent = new Intent(AllStudentProjectActivity.this, ProjectdetailsActivity.class);
+                                            intent.putExtra("title",studentProjects.get(i).getProjectname());
+                                            intent.putExtra("language",studentProjects.get(i).getLanguage());
+                                            intent.putExtra("semester",studentProjects.get(i).getSemester());
+                                            intent.putExtra("year",studentProjects.get(i).getYear());
+                                            intent.putExtra("owner",studentProjects.get(i).getProjectowner());
+                                            intent.putExtra("report",studentProjects.get(i).getProject_report());
+                                            intent.putExtra("github",studentProjects.get(i).getGithublink());
+                                            intent.putExtra("desc",studentProjects.get(i).getProject_details());
+                                        }
+                                    });
+
 
 
 

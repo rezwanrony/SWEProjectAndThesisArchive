@@ -169,7 +169,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content" />
 
-            <TextView
+           <!-- <TextView
                 android:layout_marginLeft="2dp"
                 android:textSize="15sp"
                 android:layout_gravity="center"
@@ -186,7 +186,7 @@
                 android:textColor="#FFFF00"
                 android:id="@+id/tv_signupmessage_admin"
                 android:layout_width="wrap_content"
-                android:layout_height="wrap_content" />
+                android:layout_height="wrap_content" />-->
         </LinearLayout>
 
     </LinearLayout>
