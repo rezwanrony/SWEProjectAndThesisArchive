@@ -1,16 +1,9 @@
 package com.example.lenovo.sweprojectothesis;
 
-import android.app.Activity;
 import android.app.ProgressDialog;
-import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
-import android.view.View;
-import android.widget.AdapterView;
-import android.widget.ImageView;
-import android.widget.ListView;
-import android.widget.TextView;
 import android.widget.Toast;
 
 import com.android.volley.AuthFailureError;
@@ -21,6 +14,11 @@ import com.android.volley.VolleyError;
 import com.android.volley.VolleyLog;
 import com.android.volley.toolbox.JsonObjectRequest;
 import com.android.volley.toolbox.Volley;
+import com.github.mikephil.charting.charts.BarChart;
+import com.github.mikephil.charting.data.BarData;
+import com.github.mikephil.charting.data.BarDataSet;
+import com.github.mikephil.charting.data.BarEntry;
+import com.github.mikephil.charting.utils.ColorTemplate;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -31,32 +29,34 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-public class CoursesActivity extends AppCompatActivity {
+public class ProjectStatsActivity extends AppCompatActivity {
 
-    ListView lv_students;
+    BarChart chart ;
+    ArrayList<BarEntry> BARENTRY ;
+    ArrayList<String> BarEntryLabels ;
+    List<Projectstat>projectstatList;
+    BarDataSet Bardataset ;
+    BarData BARDATA ;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_courses);
+        setContentView(R.layout.activity_project_stats);
+        chart = (BarChart) findViewById(R.id.chart1);
+        projectstatList=new ArrayList<Projectstat>();
+        BARENTRY = new ArrayList<>();
 
-        lv_students=(ListView)findViewById(R.id.lv_listofprojectstudent);
+        BarEntryLabels = new ArrayList<String>();
 
-        getToolbar(CoursesActivity.this,"Courses List");
+        getProjectStats();
 
-        getCourses();
     }
 
-    private void getCourses(){
+    private void getProjectStats(){
 
-        final ProgressDialog dialog=PDialog.showDialog(CoursesActivity.this);
-        String url=ApiUtils.BASE_URL+"course.php";
+        final ProgressDialog dialog=PDialog.showDialog(ProjectStatsActivity.this);
+        String url=ApiUtils.BASE_URL+"projectstatlist.php";
         final String TAG="Volley Response";
-
         RequestQueue queue = Volley.newRequestQueue(this);
-
-        final List<Course> courses =new ArrayList<Course>();
-
-
 
         final JsonObjectRequest jsonObjReq = new JsonObjectRequest(Request.Method.GET,
                 url, new JSONObject(),
@@ -69,20 +69,39 @@ public class CoursesActivity extends AppCompatActivity {
                         try {
                             int status=response.getInt("status");
                             if (status==1) {
-                                JSONArray jsonArray=response.getJSONArray("course");
-                                for (int i=0;i<jsonArray.length();i++) {
-                                    JSONObject jsonObject = jsonArray.getJSONObject(i);
-                                    String course_code = jsonObject.getString("course_code");
-                                    String course_name = jsonObject.getString("course_name");
-                                    courses.add(new Course(course_code,course_name));
+
+                                JSONArray jsonArray=response.getJSONArray("data");
+                                for (int i=0;i<jsonArray.length();i++){
+                                    JSONObject jsonObject=jsonArray.getJSONObject(i);
+                                    String programming_language=jsonObject.getString("programming_language");
+                                    int count=jsonObject.getInt("count");
+                                    projectstatList.add(new Projectstat(programming_language,count));
                                 }
 
-                                CustomCourseListAdapter customCourseListAdapter =new CustomCourseListAdapter(CoursesActivity.this, courses);
+                                for (int i=0;i<projectstatList.size();i++) {
+                                    BARENTRY.add(new BarEntry(Float.parseFloat(String.valueOf(projectstatList.get(i).getCount())), i));
+                                }
 
-                                lv_students.setAdapter(customCourseListAdapter);
+                                for (int i=0;i<projectstatList.size();i++) {
+                                    BarEntryLabels.add(projectstatList.get(i).getProgramming_language());
+                                }
+
+                                Bardataset = new BarDataSet(BARENTRY, "Programming language used");
+
+                                BARDATA = new BarData(BarEntryLabels, Bardataset);
+
+                                Bardataset.setColors(ColorTemplate.COLORFUL_COLORS);
+
+
+                                chart.setData(BARDATA);
+
+                                chart.animateY(2000);
+
+
+
                             }
                             else {
-                                Toast.makeText(CoursesActivity.this, response.getString("msg"), Toast.LENGTH_SHORT).show();
+                                Toast.makeText(ProjectStatsActivity.this, response.getString("desc"), Toast.LENGTH_SHORT).show();
                             }
                         } catch (JSONException e) {
                             e.printStackTrace();
@@ -116,17 +135,5 @@ public class CoursesActivity extends AppCompatActivity {
         queue.add(jsonObjReq);
     }
 
-    public static void getToolbar(final Activity activity, String title){
-        TextView tv_title=activity.findViewById(R.id.toolbartitle);
-        tv_title.setText(title);
-        ImageView img_back=activity.findViewById(R.id.img_backicon);
-        img_back.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                activity.onBackPressed();
-            }
-        });
 
-
-    }
 }

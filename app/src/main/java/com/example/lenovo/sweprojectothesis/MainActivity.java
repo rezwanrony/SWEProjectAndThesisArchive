@@ -1,7 +1,10 @@
 package com.example.lenovo.sweprojectothesis;
 
 import android.app.ProgressDialog;
+import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
+import android.preference.PreferenceManager;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
@@ -53,6 +56,9 @@ public class MainActivity extends AppCompatActivity {
                 }
                 else if (activity.equals("teacher")){
                     getTeacherLogin();
+                }
+                else if (activity.equals("admin")){
+                    getAdminLogin();
                 }
                // startActivity(new Intent(MainActivity.this,SignUpActivity.class));
             }
@@ -208,4 +214,82 @@ public class MainActivity extends AppCompatActivity {
         // Adding request to request queue
         queue.add(jsonObjReq);
     }
+
+    private void getAdminLogin(){
+
+        final ProgressDialog dialog=PDialog.showDialog(MainActivity.this);
+        String url=ApiUtils.BASE_URL+"adminlogin.php";
+        final String TAG="Volley Response";
+
+        RequestQueue queue = Volley.newRequestQueue(this);
+
+
+
+        Map<String, String> postParam= new HashMap<String, String>();
+        postParam.put("email", et_email.getText().toString());
+        postParam.put("password", et_password.getText().toString());
+
+
+        final JsonObjectRequest jsonObjReq = new JsonObjectRequest(Request.Method.POST,
+                url, new JSONObject(postParam),
+                new Response.Listener<JSONObject>() {
+
+                    @Override
+                    public void onResponse(JSONObject response) {
+                        dialog.dismiss();
+                        Log.d(TAG, response.toString());
+                        try {
+                            int status=response.getInt("status");
+                            if (status==1) {
+                                Toast.makeText(MainActivity.this, response.getString("msg"), Toast.LENGTH_SHORT).show();
+                                setDefaults("adminemail",et_email.getText().toString().trim(),MainActivity.this);
+                                startActivity(new Intent(MainActivity.this,AdminDashboardActivity.class));
+                            }
+                            else {
+                                Toast.makeText(MainActivity.this, response.getString("msg"), Toast.LENGTH_SHORT).show();
+                            }
+                        } catch (JSONException e) {
+                            e.printStackTrace();
+                        }
+                    }
+                }, new Response.ErrorListener() {
+
+            @Override
+            public void onErrorResponse(VolleyError error) {
+                dialog.dismiss();
+                VolleyLog.d(TAG, "Error: " + error.getMessage());
+            }
+        }) {
+
+            /**
+             * Passing some request headers
+             * */
+            @Override
+            public Map<String, String> getHeaders() throws AuthFailureError {
+                HashMap<String, String> headers = new HashMap<String, String>();
+                headers.put("Content-Type", "application/json; charset=utf-8");
+                return headers;
+            }
+
+
+
+        };
+
+        jsonObjReq.setTag(TAG);
+        // Adding request to request queue
+        queue.add(jsonObjReq);
+    }
+
+    public static void setDefaults(String key, String value,  Context context) {
+        SharedPreferences preferences = PreferenceManager.getDefaultSharedPreferences(context);
+        SharedPreferences.Editor editor = preferences.edit();
+        editor.putString(key, value);
+        editor.commit();
+    }
+
+    public static String getDefaults(String key, Context context) {
+        SharedPreferences preferences = PreferenceManager.getDefaultSharedPreferences(context);
+        return preferences.getString(key, null);
+    }
+
 }

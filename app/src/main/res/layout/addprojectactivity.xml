@@ -1,0 +1,375 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <include
+        android:id="@+id/topbar"
+        layout="@layout/top_bartwo"
+        />
+<LinearLayout
+    android:layout_below="@+id/topbar"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical"
+    >
+
+
+
+    <LinearLayout
+        android:weightSum="10"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:layout_marginTop="10dp"
+        android:layout_marginLeft="20dp"
+        android:layout_marginRight="20dp"
+        >
+
+        <TextView
+            android:layout_gravity="center"
+            android:layout_width="50dp"
+            android:layout_weight="3"
+            android:layout_height="wrap_content"
+            android:text="Title"
+            android:textSize="12dp"
+
+            />
+        <LinearLayout
+            android:layout_width="120dp"
+            android:layout_weight="7"
+            android:layout_height="38dp">
+            <EditText
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:id="@+id/et_title_addproject"
+                android:textSize="12sp"
+
+                />
+
+
+        </LinearLayout>
+
+
+
+    </LinearLayout>
+
+
+
+
+    <LinearLayout
+        android:weightSum="10"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="15dp"
+        android:layout_marginLeft="20dp"
+        android:layout_marginRight="20dp"
+        android:orientation="horizontal"
+        >
+
+        <LinearLayout
+            android:layout_width="50dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="3"
+            android:orientation="vertical">
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Project details"
+                android:textSize="12sp"
+                />
+
+        </LinearLayout>
+
+        <RelativeLayout
+            android:layout_width="120dp"
+            android:layout_weight="7"
+            android:background="@drawable/bg_edittext_input"
+            android:layout_height="80dp"
+            >
+
+            <EditText
+                android:padding="5dp"
+                android:gravity="start"
+                android:id="@+id/et_projectdetails_addproject"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:background="@android:color/transparent"
+                android:textSize="12sp"
+
+
+
+                />
+
+
+
+
+        </RelativeLayout>
+
+
+
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:weightSum="10"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:layout_marginTop="15dp"
+        android:layout_marginLeft="20dp"
+        android:layout_marginRight="20dp"
+        >
+
+        <TextView
+            android:layout_gravity="center"
+            android:layout_width="50dp"
+            android:layout_weight="3"
+            android:layout_height="wrap_content"
+            android:text="Used programming language"
+            android:textSize="12dp"
+
+            />
+        <LinearLayout
+            android:layout_width="120dp"
+            android:layout_weight="7"
+            android:layout_height="38dp">
+            <EditText
+                android:id="@+id/et_programminglanguage_addproject"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:textSize="12sp"
+
+                />
+
+
+        </LinearLayout>
+
+
+
+    </LinearLayout>
+    <LinearLayout
+        android:weightSum="10"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:layout_marginTop="15dp"
+        android:layout_marginLeft="20dp"
+        android:layout_marginRight="20dp"
+        >
+
+        <TextView
+            android:layout_gravity="center"
+            android:layout_width="50dp"
+            android:layout_weight="3"
+            android:layout_height="wrap_content"
+            android:text="Semester"
+            android:textSize="12dp"
+
+            />
+        <LinearLayout
+            android:gravity="center"
+            android:layout_width="120dp"
+            android:layout_weight="7"
+            android:layout_height="38dp">
+            <Spinner
+                android:id="@+id/spinner_semester_addprojects"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:textSize="12sp"
+
+                />
+
+
+        </LinearLayout>
+
+
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/ll_developedby"
+        android:weightSum="10"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:layout_marginTop="15dp"
+        android:layout_marginLeft="20dp"
+        android:layout_marginRight="20dp"
+        >
+
+        <TextView
+            android:layout_gravity="center"
+            android:layout_width="50dp"
+            android:layout_weight="3"
+            android:layout_height="wrap_content"
+            android:text="Developed by"
+            android:textSize="12dp"
+
+            />
+        <LinearLayout
+            android:layout_width="120dp"
+            android:layout_weight="7"
+            android:layout_height="38dp">
+            <EditText
+                android:id="@+id/et_developedby_addproject"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:textSize="12sp"
+
+                />
+
+
+        </LinearLayout>
+
+
+
+    </LinearLayout>
+    <LinearLayout
+        android:weightSum="10"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:layout_marginTop="15dp"
+        android:layout_marginLeft="20dp"
+        android:layout_marginRight="20dp"
+        >
+
+        <TextView
+            android:layout_gravity="center"
+            android:layout_width="50dp"
+            android:layout_weight="3"
+            android:layout_height="wrap_content"
+            android:text="Github link"
+            android:textSize="12dp"
+
+            />
+        <LinearLayout
+
+            android:layout_width="120dp"
+            android:layout_weight="7"
+            android:layout_height="38dp">
+            <EditText
+                android:id="@+id/et_githublink_addproject"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:textSize="12sp"
+
+                />
+
+
+        </LinearLayout>
+
+
+
+    </LinearLayout>
+    <LinearLayout
+        android:weightSum="10"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:layout_marginTop="15dp"
+        android:layout_marginLeft="20dp"
+        android:layout_marginRight="20dp"
+        >
+
+        <Button
+            android:layout_weight="1"
+            android:id="@+id/btn_addprojectreport"
+            android:padding="5dp"
+            android:drawableLeft="@drawable/attachement"
+            android:textAllCaps="false"
+            android:background="@drawable/bg_edittext_input"
+            android:layout_width="130dp"
+            android:layout_height="wrap_content"
+            android:text="Add project report"
+            android:textSize="12sp"
+
+            />
+        <LinearLayout
+            android:layout_weight="9"
+            android:layout_gravity="center"
+            android:layout_marginLeft="10dp"
+            android:gravity="center"
+            android:layout_width="150dp"
+            android:layout_height="wrap_content">
+            <TextView
+                android:visibility="invisible"
+                android:drawableLeft="@drawable/pdflayer"
+                android:id="@+id/tv_projectreportname_addproject"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:textSize="12sp"
+
+                />
+
+
+        </LinearLayout>
+
+
+
+    </LinearLayout>
+
+
+
+
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:background="#ddd"
+        android:layout_marginTop="15dp"/>
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="10dp"
+        >
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentRight="true">
+
+
+            <Button
+                android:textColor="@color/colorPrimary"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="CLEAR"
+                android:id="@+id/btn_cancel_injurypopup"
+                android:background="@null"
+                android:layout_marginRight="10dp"
+
+
+
+                />
+            <Button
+                android:textColor="@color/colorPrimary"
+                android:id="@+id/btn_add_addreport"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Add"
+                android:background="@null"
+
+
+                />
+
+        </LinearLayout>
+
+
+
+
+
+
+
+
+    </RelativeLayout>
+
+
+
+
+</LinearLayout>
+
+    </RelativeLayout>

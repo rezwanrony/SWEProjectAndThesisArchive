@@ -90,6 +90,29 @@
 
         </LinearLayout>
 
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_gravity="center_horizontal"
+            android:gravity="center"
+            android:orientation="vertical"
+            android:layout_height="wrap_content">
+
+            <Button
+                android:id="@+id/btn_admin"
+                android:layout_width="80dp"
+                android:layout_height="80dp"
+                android:background="@drawable/admin"/>
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Admin"
+                android:textColor="@color/white"
+                android:textSize="20dp"
+                android:textStyle="bold"
+                />
+        </LinearLayout>
+
         <TextView
             android:textSize="18sp"
             android:layout_gravity="center"
@@ -103,14 +126,14 @@
 
         <LinearLayout
             android:gravity="center"
-            android:layout_marginLeft="20dp"
-            android:layout_marginRight="20dp"
+            android:layout_marginLeft="10dp"
+            android:layout_marginRight="10dp"
             android:layout_marginTop="10dp"
             android:orientation="horizontal"
             android:layout_width="match_parent"
             android:layout_height="wrap_content">
         <TextView
-            android:textSize="18sp"
+            android:textSize="15sp"
             android:layout_gravity="center"
             android:text="Sign up as "
             android:textColor="@color/white"
@@ -119,7 +142,7 @@
 
             <TextView
                 android:layout_marginLeft="2dp"
-                android:textSize="18sp"
+                android:textSize="15sp"
                 android:layout_gravity="center"
                 android:text="Student "
                 android:textColor="#FFFF00"
@@ -129,7 +152,7 @@
 
             <TextView
                 android:layout_marginLeft="2dp"
-                android:textSize="18sp"
+                android:textSize="15sp"
                 android:layout_gravity="center"
                 android:text="or as "
                 android:textColor="@color/white"
@@ -138,11 +161,30 @@
 
             <TextView
                 android:layout_marginLeft="2dp"
-                android:textSize="18sp"
+                android:textSize="15sp"
                 android:layout_gravity="center"
                 android:text="Teacher"
                 android:textColor="#FFFF00"
                 android:id="@+id/tv_signupmessage_teacher"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content" />
+
+            <TextView
+                android:layout_marginLeft="2dp"
+                android:textSize="15sp"
+                android:layout_gravity="center"
+                android:text="or as "
+                android:textColor="@color/white"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content" />
+
+            <TextView
+                android:layout_marginLeft="2dp"
+                android:textSize="15sp"
+                android:layout_gravity="center"
+                android:text="Admin"
+                android:textColor="#FFFF00"
+                android:id="@+id/tv_signupmessage_admin"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content" />
         </LinearLayout>

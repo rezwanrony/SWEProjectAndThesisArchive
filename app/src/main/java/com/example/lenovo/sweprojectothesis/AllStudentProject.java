@@ -5,17 +5,16 @@ public class AllStudentProject {
     private String projectname;
     private String projectowner;
     private String language;
-    private String course;
     private String semester;
+    private String year;
 
-    public AllStudentProject(String projectname, String projectowner, String language, String course, String semester) {
+    public AllStudentProject(String projectname, String projectowner, String language, String semester, String year) {
         this.projectname = projectname;
         this.projectowner = projectowner;
         this.language = language;
-        this.course = course;
         this.semester = semester;
+        this.year = year;
     }
-
 
     public String getProjectname() {
         return projectname;
@@ -41,12 +40,12 @@ public class AllStudentProject {
         this.language = language;
     }
 
-    public String getCourse() {
-        return course;
+    public String getYear() {
+        return year;
     }
 
-    public void setCourse(String course) {
-        this.course = course;
+    public void setYear(String year) {
+        this.year = year;
     }
 
     public String getSemester() {

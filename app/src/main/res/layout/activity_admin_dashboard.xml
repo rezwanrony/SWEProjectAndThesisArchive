@@ -7,9 +7,6 @@
     tools:openDrawer="end"
     android:id="@+id/drawerlayoutuserpro">
 
-    <ScrollView
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content">
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
@@ -46,83 +43,50 @@
 
 
                     <de.hdodenhof.circleimageview.CircleImageView
-                        android:layout_marginBottom="10dp"
+                        android:layout_marginBottom="15dp"
                         app:civ_border_color="@color/white"
                         app:civ_border_width="2dp"
                         android:layout_gravity="center"
                         android:src="@drawable/profilepic"
-                        android:id="@+id/img_profilepicteacher"
+                        android:id="@+id/img_profilepicstudent"
                         android:layout_width="100dp"
                         android:layout_height="100dp" />
 
                     <LinearLayout
-                        android:layout_gravity="center"
+                        android:layout_marginTop="10dp"
+                        android:layout_marginLeft="15dp"
+                        android:orientation="vertical"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content">
+
+                    <TextView
+                        android:id="@+id/tv_proname_admindashboard"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:layout_marginLeft="15dp"
-                        android:orientation="vertical">
+                        android:text=""
+                        android:textAllCaps="true"
+                        android:textColor="@color/white"
+                        android:textSize="16sp" />
+
+                    <LinearLayout
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="5dp"
+                        android:orientation="horizontal">
 
                         <TextView
-                            android:id="@+id/tv_proname_teacherdashboard"
-                            android:layout_width="match_parent"
+                            android:id="@+id/tv_email_admindashboard"
+                            android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:text=""
-                            android:textAllCaps="true"
+                            android:textAllCaps="false"
                             android:textColor="@color/white"
-                            android:textSize="16sp" />
+                            android:textSize="12sp" />
 
-                        <LinearLayout
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:layout_marginTop="5dp"
-                            android:orientation="horizontal">
-
-                            <TextView
-                                android:id="@+id/tv_email_teacherdashboard"
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:text=""
-                                android:textAllCaps="false"
-                                android:textColor="@color/white"
-                                android:textSize="12sp" />
-
-
-                        </LinearLayout>
-
-                        <LinearLayout
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:layout_marginTop="5dp"
-                            android:orientation="horizontal">
-
-                            <TextView
-                                android:id="@+id/tv_phone_teacherdashboard"
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:text=""
-                                android:textAllCaps="false"
-                                android:textColor="@color/white"
-                                android:textSize="12sp" />
-
-
-                        </LinearLayout>
-
-
-
-                        <LinearLayout
-                            android:layout_marginTop="10dp"
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content">
-                            <ImageView
-                                android:id="@+id/img_settings_teacher"
-                                android:layout_width="25dp"
-                                android:layout_height="25dp"
-                                android:src="@drawable/cameraicon" />
-                        </LinearLayout>
 
                     </LinearLayout>
 
-
+                    </LinearLayout>
 
                 </LinearLayout>
 
@@ -141,7 +105,7 @@
                 <android.support.v7.widget.CardView
                     android:foreground="?android:attr/selectableItemBackground"
                     android:clickable="true"
-                    android:id="@+id/card_seecourselist"
+                    android:id="@+id/card_addcourse"
                     android:layout_width="160dp"
                     android:layout_height="190dp"
                     android:layout_marginLeft="10dp"
@@ -162,8 +126,7 @@
                             android:layout_height="wrap_content"
                             android:textStyle="bold"
                             android:layout_marginTop="10dp"
-                            android:layout_marginBottom="10dp"
-                            android:text="Requested Student List"/>
+                            android:text="Add courses"/>
                         <View
                             android:layout_width="match_parent"
                             android:layout_height="1dp"
@@ -173,7 +136,7 @@
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:gravity="center"
-                            android:text="Check the requested student list"
+                            android:text="add project related courses list"
                             android:padding="5dp"
                             android:textColor="@android:color/darker_gray"/>
 
@@ -182,7 +145,7 @@
                 <android.support.v7.widget.CardView
                     android:foreground="?android:attr/selectableItemBackground"
                     android:clickable="true"
-                    android:id="@+id/card_virtualclassroomteacher"
+                    android:id="@+id/card_addpreviousproject"
                     android:layout_width="160dp"
                     android:layout_height="190dp"
                     android:layout_marginLeft="20dp"
@@ -198,12 +161,11 @@
                             android:background="@drawable/virtualclassroom"
                             android:padding="10dp"/>
                         <TextView
-                            android:layout_marginBottom="10dp"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:textStyle="bold"
                             android:layout_marginTop="10dp"
-                            android:text="Create Virtual classroom"/>
+                            android:text="Add previous projects"/>
                         <View
                             android:layout_width="match_parent"
                             android:layout_height="1dp"
@@ -213,7 +175,7 @@
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:gravity="center"
-                            android:text="Create and use virtual classroom"
+                            android:text="Add semesters information"
                             android:padding="5dp"
                             android:textColor="@android:color/darker_gray"/>
 
@@ -231,12 +193,51 @@
                 <android.support.v7.widget.CardView
                     android:foreground="?android:attr/selectableItemBackground"
                     android:clickable="true"
-                    android:id="@+id/card_createdvc"
+                    android:id="@+id/card_seecourselistadmin"
                     android:layout_width="160dp"
                     android:layout_height="190dp"
                     android:layout_marginLeft="10dp"
                     android:layout_marginRight="10dp"
                     >
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:orientation="vertical"
+                        android:gravity="center">
+                        <ImageView
+                            android:layout_width="64dp"
+                            android:layout_height="64dp"
+                            android:background="@drawable/courseicon"
+                            android:padding="10dp"/>
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:textStyle="bold"
+                            android:layout_marginTop="10dp"
+                            android:text="See courses list"/>
+                        <View
+                            android:layout_width="match_parent"
+                            android:layout_height="1dp"
+                            android:background="@color/lightgray"
+                            android:layout_margin="10dp"/>
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:gravity="center"
+                            android:text="Checkout the courses list"
+                            android:padding="5dp"
+                            android:textColor="@android:color/darker_gray"/>
+
+                    </LinearLayout>
+                </android.support.v7.widget.CardView>
+                <android.support.v7.widget.CardView
+                    android:id="@+id/card_seeprojectlist_admin"
+                    android:foreground="?android:attr/selectableItemBackground"
+                    android:clickable="true"
+                    android:layout_width="160dp"
+                    android:layout_height="190dp"
+                    android:layout_marginLeft="20dp"
+                    android:layout_marginRight="10dp">
                     <LinearLayout
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
@@ -252,7 +253,7 @@
                             android:layout_height="wrap_content"
                             android:textStyle="bold"
                             android:layout_marginTop="10dp"
-                            android:text="Virtual Classroom List"/>
+                            android:text="See Added Projects"/>
                         <View
                             android:layout_width="match_parent"
                             android:layout_height="1dp"
@@ -262,135 +263,7 @@
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:gravity="center"
-                            android:text="Check previous project list"
-                            android:padding="5dp"
-                            android:textColor="@android:color/darker_gray"/>
-
-                    </LinearLayout>
-                </android.support.v7.widget.CardView>
-                <android.support.v7.widget.CardView
-                    android:foreground="?android:attr/selectableItemBackground"
-                    android:clickable="true"
-                    android:layout_width="160dp"
-                    android:layout_height="190dp"
-                    android:id="@+id/card_projectstats"
-                    android:layout_marginLeft="20dp"
-                    android:layout_marginRight="10dp">
-                    <LinearLayout
-                        android:layout_width="match_parent"
-                        android:layout_height="match_parent"
-                        android:orientation="vertical"
-                        android:gravity="center">
-                        <ImageView
-                            android:layout_width="64dp"
-                            android:layout_height="64dp"
-                            android:background="@drawable/projectstatistics"
-                            android:padding="10dp"/>
-                        <TextView
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:textStyle="bold"
-                            android:layout_marginTop="10dp"
-                            android:text="Project statistics"/>
-                        <View
-                            android:layout_width="match_parent"
-                            android:layout_height="1dp"
-                            android:background="@color/lightgray"
-                            android:layout_margin="10dp"/>
-                        <TextView
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:gravity="center"
-                            android:text="Check statistics of projects"
-                            android:padding="5dp"
-                            android:textColor="@android:color/darker_gray"/>
-
-                    </LinearLayout>
-                </android.support.v7.widget.CardView>
-
-            </LinearLayout>
-            <LinearLayout
-                android:layout_marginTop="20dp"
-                android:clipToPadding="false"
-                android:gravity="center"
-                android:orientation="horizontal"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content">
-                <android.support.v7.widget.CardView
-                    android:foreground="?android:attr/selectableItemBackground"
-                    android:clickable="true"
-                    android:id="@+id/card_seeprojectlisteacher"
-                    android:layout_width="160dp"
-                    android:layout_height="190dp"
-                    android:layout_marginLeft="10dp"
-                    android:layout_marginRight="10dp"
-                    >
-                    <LinearLayout
-                        android:layout_width="match_parent"
-                        android:layout_height="match_parent"
-                        android:orientation="vertical"
-                        android:gravity="center">
-                        <ImageView
-                            android:layout_width="64dp"
-                            android:layout_height="64dp"
-                            android:background="@drawable/project"
-                            android:padding="10dp"/>
-                        <TextView
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:textStyle="bold"
-                            android:layout_marginTop="10dp"
-                            android:text="Previous project list"/>
-                        <View
-                            android:layout_width="match_parent"
-                            android:layout_height="1dp"
-                            android:background="@color/lightgray"
-                            android:layout_margin="10dp"/>
-                        <TextView
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:gravity="center"
-                            android:text="Check previous project list"
-                            android:padding="5dp"
-                            android:textColor="@android:color/darker_gray"/>
-
-                    </LinearLayout>
-                </android.support.v7.widget.CardView>
-                <android.support.v7.widget.CardView
-                    android:visibility="invisible"
-                    android:background="@color/white"
-                    android:foreground="?android:attr/selectableItemBackground"
-                    android:clickable="true"
-                    android:layout_width="160dp"
-                    android:layout_height="190dp"
-                    android:layout_marginLeft="20dp"
-                    android:layout_marginRight="10dp">
-                    <LinearLayout
-                        android:layout_width="match_parent"
-                        android:layout_height="match_parent"
-                        android:orientation="vertical"
-                        android:gravity="center">
-                        <ImageView
-                            android:layout_width="64dp"
-                            android:layout_height="64dp"
-                            android:background="@drawable/projectstatistics"
-                            android:padding="10dp"/>
-                        <TextView
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:textStyle="bold"
-                            android:layout_marginTop="10dp"
-                            android:text="Project statistics"/>
-                        <View
-                            android:layout_width="match_parent"
-                            android:layout_height="1dp"
-                            android:background="@color/lightgray"
-                            android:layout_margin="10dp"/>
-                        <TextView
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:gravity="center"
-                            android:text="Check statistics of projects"
+                            android:text="Check the projects you have added"
                             android:padding="5dp"
                             android:textColor="@android:color/darker_gray"/>
 
@@ -406,5 +279,4 @@
 
 
     </RelativeLayout>
-    </ScrollView>
 </RelativeLayout>

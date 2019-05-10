@@ -1,16 +1,10 @@
 package com.example.lenovo.sweprojectothesis;
 
-import android.app.Activity;
 import android.app.ProgressDialog;
-import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
-import android.view.View;
-import android.widget.AdapterView;
-import android.widget.ImageView;
 import android.widget.ListView;
-import android.widget.TextView;
 import android.widget.Toast;
 
 import com.android.volley.AuthFailureError;
@@ -31,32 +25,31 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-public class CoursesActivity extends AppCompatActivity {
+public class RequestedStudentListActivity extends AppCompatActivity {
 
-    ListView lv_students;
+    List<RequestedStudentList>requestedStudentLists;
+    SQLiteHandler db;
+    ListView lv_requestedstudentlist;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_courses);
-
-        lv_students=(ListView)findViewById(R.id.lv_listofprojectstudent);
-
-        getToolbar(CoursesActivity.this,"Courses List");
-
-        getCourses();
+        setContentView(R.layout.activity_requested_student_list);
+        lv_requestedstudentlist=findViewById(R.id.lv_requestedstudentlist);
+        db=new SQLiteHandler(RequestedStudentListActivity.this);
+        requestedStudentLists=new ArrayList<RequestedStudentList>();
+        CoursesActivity.getToolbar(RequestedStudentListActivity.this,"Requested student list");
+        getRequestedVCList();
     }
 
-    private void getCourses(){
+    private void getRequestedVCList(){
 
-        final ProgressDialog dialog=PDialog.showDialog(CoursesActivity.this);
-        String url=ApiUtils.BASE_URL+"course.php";
+        final ProgressDialog dialog=PDialog.showDialog(RequestedStudentListActivity.this);
+        List<Teacher>teacherList=new ArrayList<Teacher>();
+        teacherList=db.getTeacherDetails();
+        String url=ApiUtils.BASE_URL+"requestedStudentList.php?teacher_email="+teacherList.get(0).getPhone();
         final String TAG="Volley Response";
-
         RequestQueue queue = Volley.newRequestQueue(this);
-
-        final List<Course> courses =new ArrayList<Course>();
-
-
 
         final JsonObjectRequest jsonObjReq = new JsonObjectRequest(Request.Method.GET,
                 url, new JSONObject(),
@@ -69,20 +62,25 @@ public class CoursesActivity extends AppCompatActivity {
                         try {
                             int status=response.getInt("status");
                             if (status==1) {
-                                JSONArray jsonArray=response.getJSONArray("course");
-                                for (int i=0;i<jsonArray.length();i++) {
-                                    JSONObject jsonObject = jsonArray.getJSONObject(i);
-                                    String course_code = jsonObject.getString("course_code");
-                                    String course_name = jsonObject.getString("course_name");
-                                    courses.add(new Course(course_code,course_name));
+
+                                JSONArray jsonArray=response.getJSONArray("data");
+                                for (int i=0;i<jsonArray.length();i++){
+                                    JSONObject jsonObject=jsonArray.getJSONObject(i);
+                                    String name=jsonObject.getString("name");
+                                    String email=jsonObject.getString("email");
+                                    String teacher_email=jsonObject.getString("teacher_email");
+                                    int classroom_id=jsonObject.getInt("classroom_id");
+                                    String classroomname=jsonObject.getString("classroomname");
+
+                                    requestedStudentLists.add(new RequestedStudentList(name,email,teacher_email,classroom_id,classroomname));
                                 }
 
-                                CustomCourseListAdapter customCourseListAdapter =new CustomCourseListAdapter(CoursesActivity.this, courses);
+                                CustomRequestedStudentList customRequestedVCList=new CustomRequestedStudentList(RequestedStudentListActivity.this,requestedStudentLists);
+                                lv_requestedstudentlist.setAdapter(customRequestedVCList);
 
-                                lv_students.setAdapter(customCourseListAdapter);
                             }
                             else {
-                                Toast.makeText(CoursesActivity.this, response.getString("msg"), Toast.LENGTH_SHORT).show();
+                                Toast.makeText(RequestedStudentListActivity.this, response.getString("desc"), Toast.LENGTH_SHORT).show();
                             }
                         } catch (JSONException e) {
                             e.printStackTrace();
@@ -114,19 +112,5 @@ public class CoursesActivity extends AppCompatActivity {
         jsonObjReq.setTag(TAG);
         // Adding request to request queue
         queue.add(jsonObjReq);
-    }
-
-    public static void getToolbar(final Activity activity, String title){
-        TextView tv_title=activity.findViewById(R.id.toolbartitle);
-        tv_title.setText(title);
-        ImageView img_back=activity.findViewById(R.id.img_backicon);
-        img_back.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                activity.onBackPressed();
-            }
-        });
-
-
     }
 }

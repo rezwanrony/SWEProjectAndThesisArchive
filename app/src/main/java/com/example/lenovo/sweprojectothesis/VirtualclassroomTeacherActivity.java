@@ -20,7 +20,7 @@ public class VirtualclassroomTeacherActivity extends AppCompatActivity {
         btn_add.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                CustomAddAssignmentsPopup dialog = new CustomAddAssignmentsPopup(VirtualclassroomTeacherActivity.this);
+                CustomAddCoursesPopup dialog = new CustomAddCoursesPopup(VirtualclassroomTeacherActivity.this);
                 WindowManager.LayoutParams lWindowParams = new WindowManager.LayoutParams();
                 lWindowParams.width = WindowManager.LayoutParams.MATCH_PARENT; // this is where the magic happens
                 lWindowParams.height = WindowManager.LayoutParams.WRAP_CONTENT;

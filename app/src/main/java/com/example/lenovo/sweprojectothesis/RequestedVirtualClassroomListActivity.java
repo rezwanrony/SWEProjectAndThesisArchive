@@ -1,16 +1,10 @@
 package com.example.lenovo.sweprojectothesis;
 
-import android.app.Activity;
 import android.app.ProgressDialog;
-import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
-import android.view.View;
-import android.widget.AdapterView;
-import android.widget.ImageView;
 import android.widget.ListView;
-import android.widget.TextView;
 import android.widget.Toast;
 
 import com.android.volley.AuthFailureError;
@@ -27,36 +21,35 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-public class CoursesActivity extends AppCompatActivity {
+public class RequestedVirtualClassroomListActivity extends AppCompatActivity {
 
-    ListView lv_students;
+    ListView lv_requestedvc;
+    List<RequestedVC>requestedVCList;
+    SQLiteHandler db;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_courses);
-
-        lv_students=(ListView)findViewById(R.id.lv_listofprojectstudent);
-
-        getToolbar(CoursesActivity.this,"Courses List");
-
-        getCourses();
+        setContentView(R.layout.activity_requested_virtual_classroom_list);
+        CoursesActivity.getToolbar(RequestedVirtualClassroomListActivity.this,"Requested VC List");
+        lv_requestedvc=findViewById(R.id.lv_requestedvc);
+        requestedVCList=new ArrayList<RequestedVC>();
+        db=new SQLiteHandler(RequestedVirtualClassroomListActivity.this);
+        getRequestedVCList();
     }
 
-    private void getCourses(){
+    private void getRequestedVCList(){
 
-        final ProgressDialog dialog=PDialog.showDialog(CoursesActivity.this);
-        String url=ApiUtils.BASE_URL+"course.php";
+        final ProgressDialog dialog=PDialog.showDialog(RequestedVirtualClassroomListActivity.this);
+        List<Student>studentList=new ArrayList<Student>();
+        studentList=db.getStudentDetails();
+        String url=ApiUtils.BASE_URL+"requestedVirtualClassroomList.php?student_email="+studentList.get(0).getEmail();
         final String TAG="Volley Response";
-
         RequestQueue queue = Volley.newRequestQueue(this);
-
-        final List<Course> courses =new ArrayList<Course>();
-
-
 
         final JsonObjectRequest jsonObjReq = new JsonObjectRequest(Request.Method.GET,
                 url, new JSONObject(),
@@ -69,20 +62,24 @@ public class CoursesActivity extends AppCompatActivity {
                         try {
                             int status=response.getInt("status");
                             if (status==1) {
-                                JSONArray jsonArray=response.getJSONArray("course");
-                                for (int i=0;i<jsonArray.length();i++) {
-                                    JSONObject jsonObject = jsonArray.getJSONObject(i);
-                                    String course_code = jsonObject.getString("course_code");
-                                    String course_name = jsonObject.getString("course_name");
-                                    courses.add(new Course(course_code,course_name));
+
+                                JSONArray jsonArray=response.getJSONArray("data");
+                                for (int i=0;i<jsonArray.length();i++){
+                                    JSONObject jsonObject=jsonArray.getJSONObject(i);
+                                    int id=jsonObject.getInt("id");
+                                    String name=jsonObject.getString("name");
+                                    String createdby=jsonObject.getString("createdby");
+                                    String student_email=jsonObject.getString("student_email");
+                                    int arrpovestatus=jsonObject.getInt("status");
+                                    requestedVCList.add(new RequestedVC(id,name,createdby,student_email,arrpovestatus));
                                 }
 
-                                CustomCourseListAdapter customCourseListAdapter =new CustomCourseListAdapter(CoursesActivity.this, courses);
+                                CustomRequestedVCList customRequestedVCList=new CustomRequestedVCList(RequestedVirtualClassroomListActivity.this,requestedVCList);
+                                lv_requestedvc.setAdapter(customRequestedVCList);
 
-                                lv_students.setAdapter(customCourseListAdapter);
                             }
                             else {
-                                Toast.makeText(CoursesActivity.this, response.getString("msg"), Toast.LENGTH_SHORT).show();
+                                Toast.makeText(RequestedVirtualClassroomListActivity.this, response.getString("desc"), Toast.LENGTH_SHORT).show();
                             }
                         } catch (JSONException e) {
                             e.printStackTrace();
@@ -114,19 +111,5 @@ public class CoursesActivity extends AppCompatActivity {
         jsonObjReq.setTag(TAG);
         // Adding request to request queue
         queue.add(jsonObjReq);
-    }
-
-    public static void getToolbar(final Activity activity, String title){
-        TextView tv_title=activity.findViewById(R.id.toolbartitle);
-        tv_title.setText(title);
-        ImageView img_back=activity.findViewById(R.id.img_backicon);
-        img_back.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                activity.onBackPressed();
-            }
-        });
-
-
     }
 }

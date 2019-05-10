@@ -73,9 +73,11 @@ public class VirtualClassroomListActivity extends AppCompatActivity {
                             int status=response.getInt("status");
                             if (status==1) {
                                 JSONObject jsonArray=response.getJSONObject("data");
+                                    int id = jsonArray.getInt("id");
                                     String sections = jsonArray.getString("section");
                                     String semesters = jsonArray.getString("semester");
                                     String course_names = jsonArray.getString("course_name");
+                                    String createdby = jsonArray.getString("createdby");
                                     virtualClassroomNameList.add(new VirtualClassroomName(sections,semesters,course_names));
 
 
@@ -84,7 +86,7 @@ public class VirtualClassroomListActivity extends AppCompatActivity {
                                 String semester=virtualClassroomNameList.get(0).getSemester();
                                 String section=virtualClassroomNameList.get(0).getSection();
                                 String vname=name+" "+semester+" "+String.valueOf(year)+" "+section;
-                                    virtualClassroomList.add(new VirtualClassroom(vname));
+                                    virtualClassroomList.add(new VirtualClassroom(id,vname,createdby));
 
                                 CustomVirtualClassListAdapter customVirtualClassListAdapter=new CustomVirtualClassListAdapter(VirtualClassroomListActivity.this,virtualClassroomList);
                                 lv_classroom.setAdapter(customVirtualClassListAdapter);

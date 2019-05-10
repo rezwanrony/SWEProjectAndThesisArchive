@@ -28,6 +28,8 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.Calendar;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -41,6 +43,7 @@ public class SearchVirtualClassroomActivity extends AppCompatActivity {
     int course_id;
     String semester;
     List<Course> courses;
+    ArrayList<String>semesterlist;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -52,8 +55,15 @@ public class SearchVirtualClassroomActivity extends AppCompatActivity {
         courses =new ArrayList<Course>();
         tv_title.setText("Search Virtual classroom");
 
-        ArrayAdapter<CharSequence> adapter = ArrayAdapter.createFromResource(this,
-                R.array.semester_array, R.layout.spinner_item_black);
+        semesterlist = new ArrayList<String>();
+
+        int year=Calendar.getInstance().get(Calendar.YEAR);
+        semesterlist.add("Spring "+String.valueOf(year));
+        semesterlist.add("Summer "+String.valueOf(year));
+        semesterlist.add("Fall "+String.valueOf(year));
+
+        ArrayAdapter<String> adapter = new ArrayAdapter<String>(SearchVirtualClassroomActivity.this,
+                R.layout.spinner_item_black,semesterlist);
 // Specify the layout to use when the list of choices appears
         adapter.setDropDownViewResource(android.R.layout.simple_list_item_1);
 // Apply the adapter to the spinner

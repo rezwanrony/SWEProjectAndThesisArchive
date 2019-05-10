@@ -33,8 +33,18 @@ public class SignUpActivity extends AppCompatActivity {
             }
         });
 
+        Button btn_admin=(Button)findViewById(R.id.btn_admin);
+
+        btn_admin.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                startActivity(new Intent(SignUpActivity.this,MainActivity.class).putExtra("activity","admin"));
+            }
+        });
+
         TextView tv_signup_student=findViewById(R.id.tv_signupmessage_student);
         TextView tv_signup_teacher=findViewById(R.id.tv_signupmessage_teacher);
+        TextView tv_signup_admin=findViewById(R.id.tv_signupmessage_admin);
 
         tv_signup_student.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -47,6 +57,13 @@ public class SignUpActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 startActivity(new Intent(SignUpActivity.this,TeacherRegisterActivity.class));
+            }
+        });
+
+        tv_signup_admin.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                startActivity(new Intent(SignUpActivity.this,AdminRegistrationActivity.class));
             }
         });
     }

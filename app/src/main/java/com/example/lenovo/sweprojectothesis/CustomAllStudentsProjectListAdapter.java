@@ -48,9 +48,7 @@ public class CustomAllStudentsProjectListAdapter extends BaseAdapter {
         TextView tv_language=(TextView)view.findViewById(R.id.tv_languageallproject);
         tv_language.setText(studentProjectList.get(i).getLanguage());
         TextView tv_semester=(TextView)view.findViewById(R.id.tv_semesterallproject);
-        tv_semester.setText(studentProjectList.get(i).getSemester());
-        TextView tv_course=(TextView)view.findViewById(R.id.tv_courseallproject);
-        tv_course.setText(studentProjectList.get(i).getCourse());
+        tv_semester.setText(studentProjectList.get(i).getSemester()+" "+studentProjectList.get(i).getYear());
         return view;
     }
 }

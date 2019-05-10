@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout
     android:layout_width="match_parent"
-    android:layout_height="330dp"
+    android:layout_height="240dp"
     android:orientation="vertical"
     xmlns:android="http://schemas.android.com/apk/res/android">
 
@@ -9,7 +9,7 @@
         android:id="@+id/tv_title_injurypopups"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Create Assignments"
+        android:text="Add Courses"
         android:textSize="15dp"
         android:layout_marginTop="10dp"
         android:layout_marginLeft="20dp"
@@ -22,7 +22,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="horizontal"
-        android:layout_marginTop="10dp"
+        android:layout_marginTop="20dp"
         android:layout_marginLeft="20dp"
         android:layout_marginRight="20dp"
         >
@@ -32,7 +32,7 @@
             android:layout_width="50dp"
             android:layout_weight="3"
             android:layout_height="wrap_content"
-            android:text="Title"
+            android:text="Course code"
             android:textSize="12dp"
 
             />
@@ -43,7 +43,7 @@
             <EditText
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:id="@+id/et_date_injurypopup"
+                android:id="@+id/et_coursecode_addcourse"
                 android:textSize="12sp"
 
                 />
@@ -62,69 +62,8 @@
         android:weightSum="10"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="18dp"
-        android:layout_marginLeft="20dp"
-        android:layout_marginRight="20dp"
         android:orientation="horizontal"
-        >
-
-        <LinearLayout
-            android:layout_width="50dp"
-            android:layout_height="wrap_content"
-            android:layout_weight="3"
-            android:orientation="vertical">
-
-            <TextView
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:text="Assignment"
-                android:textSize="12sp"
-                />
-            <TextView
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:text="Details"
-                android:textSize="12sp"
-                />
-
-        </LinearLayout>
-
-        <RelativeLayout
-            android:layout_width="120dp"
-            android:layout_weight="7"
-            android:background="@drawable/bg_edittext_input"
-            android:layout_height="80dp"
-            >
-
-            <EditText
-                android:padding="5dp"
-                android:gravity="start"
-                android:id="@+id/et_injurydetails_injurypopup"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:background="@android:color/transparent"
-                android:textSize="12sp"
-
-
-
-                />
-
-
-
-
-        </RelativeLayout>
-
-
-
-
-    </LinearLayout>
-
-    <LinearLayout
-        android:weightSum="10"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="horizontal"
-        android:layout_marginTop="10dp"
+        android:layout_marginTop="20dp"
         android:layout_marginLeft="20dp"
         android:layout_marginRight="20dp"
         >
@@ -134,7 +73,7 @@
             android:layout_width="50dp"
             android:layout_weight="3"
             android:layout_height="wrap_content"
-            android:text="Submission date"
+            android:text="Course title"
             android:textSize="12dp"
 
             />
@@ -143,6 +82,7 @@
             android:layout_weight="7"
             android:layout_height="38dp">
             <EditText
+                android:id="@+id/et_coursetitle_addcourse"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:textSize="12sp"
@@ -187,10 +127,10 @@
 
                 />
             <Button
-                android:id="@+id/btn_add_injurypopup"
+                android:id="@+id/btn_add_addcourse"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Create"
+                android:text="Add"
                 android:background="@null"
 
 

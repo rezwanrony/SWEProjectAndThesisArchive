@@ -21,7 +21,6 @@ import com.android.volley.VolleyLog;
 import com.android.volley.toolbox.JsonObjectRequest;
 import com.android.volley.toolbox.Volley;
 
-import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
@@ -30,24 +29,24 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-public class CustomVirtualClassListAdapter extends BaseAdapter {
+public class CustomRequestedStudentList extends BaseAdapter {
     Context context;
-    List<VirtualClassroom> studentProjectList;
+    List<RequestedStudentList> requestedVCList;
     SQLiteHandler db;
 
-    public CustomVirtualClassListAdapter(Context context, List<VirtualClassroom> studentProjectList) {
+    public CustomRequestedStudentList(Context context, List<RequestedStudentList> requestedVCList) {
         this.context = context;
-        this.studentProjectList = studentProjectList;
+        this.requestedVCList = requestedVCList;
     }
 
     @Override
     public int getCount() {
-        return studentProjectList.size();
+        return requestedVCList.size();
     }
 
     @Override
     public Object getItem(int i) {
-        return studentProjectList.get(i);
+        return requestedVCList.get(i);
     }
 
     @Override
@@ -58,41 +57,42 @@ public class CustomVirtualClassListAdapter extends BaseAdapter {
     @Override
     public View getView(final int i, View view, ViewGroup viewGroup) {
         if (view==null){
-            view= LayoutInflater.from(context).inflate(R.layout.custom_vc_list,viewGroup,false);
+            view= LayoutInflater.from(context).inflate(R.layout.custom_requested_studentlist,viewGroup,false);
 
         }
 
         db=new SQLiteHandler(context);
 
-        TextView tv_teacherinit=(TextView)view.findViewById(R.id.tv_name_vc_a);
-        tv_teacherinit.setText(studentProjectList.get(i).getName());
+        TextView classroomname=view.findViewById(R.id.tv_classroomname_requestedstudentlist);
+        TextView vname=view.findViewById(R.id.tv_name_requestedstudentlist);
+        Button btn_enter=view.findViewById(R.id.btn_approve_requestedstudentlist);
 
-        Button btn_login=(Button)view.findViewById(R.id.btn_request_vc);
+        vname.setText(requestedVCList.get(i).getEmail());
+        classroomname.setText(requestedVCList.get(i).getClassroomname());
 
-        btn_login.setOnClickListener(new View.OnClickListener() {
+        btn_enter.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-
-                requesttojoin(studentProjectList.get(i).getId(),studentProjectList.get(i).getCreatedby());
+                approverequest(requestedVCList.get(i).getClassroom_id(),requestedVCList.get(i).getEmail());
             }
         });
         return view;
     }
 
-    private void requesttojoin(int id,String teacher_email){
+    private void approverequest(int id,String student_email){
 
-        List<Student>studentList=new ArrayList<Student>();
-        studentList=db.getStudentDetails();
+        List<Teacher>teacherList=new ArrayList<Teacher>();
+        teacherList=db.getTeacherDetails();
         final ProgressDialog dialog=PDialog.showDialog(context);
-        String url=ApiUtils.BASE_URL+"joinRequest.php";
+        String url=ApiUtils.BASE_URL+"approvestudentrequest.php";
         final String TAG="Volley Response";
 
         RequestQueue queue = Volley.newRequestQueue(context);
 
 
         Map postParam= new HashMap();
-        postParam.put("student_email", studentList.get(0).getEmail());
-        postParam.put("teacher_email", teacher_email);
+        postParam.put("student_email",student_email);
+        postParam.put("teacher_email", teacherList.get(0).getPhone());
         postParam.put("classroom_id", id);
 
 
@@ -108,7 +108,7 @@ public class CustomVirtualClassListAdapter extends BaseAdapter {
                             int status=response.getInt("status");
                             if (status==1) {
                                 Toast.makeText(context, response.getString("msg"), Toast.LENGTH_SHORT).show();
-                                context.startActivity(new Intent(context,StudentDashboardActivity.class));
+                                context.startActivity(new Intent(context,TeacherDashboard.class));
                             }
                             else {
                                 Toast.makeText(context, response.getString("msg"), Toast.LENGTH_SHORT).show();
@@ -144,4 +144,5 @@ public class CustomVirtualClassListAdapter extends BaseAdapter {
         // Adding request to request queue
         queue.add(jsonObjReq);
     }
+
 }
