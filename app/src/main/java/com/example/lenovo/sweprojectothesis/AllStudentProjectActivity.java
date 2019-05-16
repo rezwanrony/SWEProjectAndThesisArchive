@@ -4,10 +4,14 @@ import android.app.ProgressDialog;
 import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.text.Editable;
+import android.text.TextWatcher;
 import android.util.Log;
 import android.view.Gravity;
 import android.view.View;
+import android.view.WindowManager;
 import android.widget.AdapterView;
+import android.widget.EditText;
 import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -36,11 +40,14 @@ public class AllStudentProjectActivity extends AppCompatActivity {
     List<AllStudentProject> studentProjects;
     SQLiteHandler db;
     TextView tv_nodata;
+    EditText et_search;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_all_student_project);
         lv_students=(ListView)findViewById(R.id.lv_listofprojectteacher);
+        this.getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_STATE_ALWAYS_HIDDEN);
+        et_search=findViewById(R.id.et_searchallproject);
         tv_nodata=findViewById(R.id.tv_nodata_allstudentproject);
         studentProjects=new ArrayList<AllStudentProject>();
         db=new SQLiteHandler(AllStudentProjectActivity.this);
@@ -57,6 +64,7 @@ public class AllStudentProjectActivity extends AppCompatActivity {
             getProjectList();
 
         }
+
     }
 
     private void getProjectList(){
@@ -92,7 +100,7 @@ public class AllStudentProjectActivity extends AppCompatActivity {
                                     studentProjects.add(new AllStudentProject(name, project_owner, programming_language, semester, year,description,project_report,githublink));
                                 }
 
-                                CustomAllStudentsProjectListAdapter customAllStudentsProjectListAdapter = new CustomAllStudentsProjectListAdapter(AllStudentProjectActivity.this, studentProjects);
+                                final CustomAllStudentsProjectListAdapter customAllStudentsProjectListAdapter = new CustomAllStudentsProjectListAdapter(AllStudentProjectActivity.this, studentProjects);
                                 lv_students.setAdapter(customAllStudentsProjectListAdapter);
 
                                 lv_students.setOnItemClickListener(new AdapterView.OnItemClickListener() {
@@ -108,6 +116,23 @@ public class AllStudentProjectActivity extends AppCompatActivity {
                                         intent.putExtra("github",studentProjects.get(i).getGithublink());
                                         intent.putExtra("desc",studentProjects.get(i).getProject_details());
                                         startActivity(intent);
+                                    }
+                                });
+
+                                et_search.addTextChangedListener(new TextWatcher() {
+                                    @Override
+                                    public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+
+                                    }
+
+                                    @Override
+                                    public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+
+                                    }
+
+                                    @Override
+                                    public void afterTextChanged(Editable editable) {
+                                         customAllStudentsProjectListAdapter.filter(editable.toString());
                                     }
                                 });
                             }

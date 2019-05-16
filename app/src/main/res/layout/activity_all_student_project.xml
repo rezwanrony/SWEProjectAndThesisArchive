@@ -14,8 +14,31 @@
             android:id="@+id/topbar"
             layout="@layout/top_bartwo"
             />
+
+        <LinearLayout
+            android:id="@+id/llsearch"
+            android:layout_below="@+id/topbar"
+            android:layout_centerInParent="true"
+            android:layout_margin="3dp"
+            android:background="@drawable/skill_drawable"
+            android:layout_width="match_parent"
+            android:layout_height="40dp">
+
+            <EditText
+                android:textSize="15sp"
+                android:id="@+id/et_searchallproject"
+                android:drawablePadding="10dp"
+                android:hint="Search projects by name"
+                android:padding="10dp"
+                android:drawableLeft="@drawable/search"
+                android:layout_gravity="center"
+                android:background="@android:color/transparent"
+                android:layout_width="match_parent"
+                android:layout_height="40dp" />
+
+        </LinearLayout>
     <LinearLayout
-        android:layout_below="@+id/topbar"
+        android:layout_below="@+id/llsearch"
         android:orientation="vertical"
         android:layout_width="match_parent"
         android:layout_height="wrap_content">

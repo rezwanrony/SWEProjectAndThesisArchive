@@ -1,22 +1,28 @@
 package com.example.lenovo.sweprojectothesis;
 
 import android.content.Context;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
 import android.widget.TextView;
 
+import java.util.ArrayList;
 import java.util.List;
+import java.util.Locale;
 
 public class CustomAllStudentsProjectListAdapter extends BaseAdapter {
 
     Context context;
     List<AllStudentProject> studentProjectList;
+    List<AllStudentProject> arraylist2;
 
     public CustomAllStudentsProjectListAdapter(Context context, List<AllStudentProject> studentProjectList) {
         this.context = context;
         this.studentProjectList = studentProjectList;
+        this.arraylist2 = new ArrayList<AllStudentProject>();
+        arraylist2.addAll(studentProjectList);
     }
 
     @Override
@@ -50,5 +56,26 @@ public class CustomAllStudentsProjectListAdapter extends BaseAdapter {
         TextView tv_semester=(TextView)view.findViewById(R.id.tv_semesterallproject);
         tv_semester.setText(studentProjectList.get(i).getSemester()+" "+studentProjectList.get(i).getYear());
         return view;
+    }
+
+    public void filter(String charText) {
+        charText = charText.toLowerCase(Locale.getDefault());
+        studentProjectList.clear();
+        if (charText.length() == 0) {
+            studentProjectList.addAll(arraylist2);
+        } else {
+
+            for (AllStudentProject a : arraylist2) {
+
+
+                Log.d("InputedValue", String.valueOf(charText));
+
+                if (a.getProjectname().toLowerCase(Locale.getDefault()).contains(charText)) {
+                    studentProjectList.add(a);
+
+                }
+                notifyDataSetChanged();
+            }
+        }
     }
 }
